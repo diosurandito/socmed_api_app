@@ -54,4 +54,29 @@ RSpec.describe 'user controller' do
             expect(status).to eq([ 400, 'missing data. please sure you already give username and email' ])
         end
     end
+
+    describe '#update' do
+        it 'should change data account with specific id' do
+            data = {"username" => "foo", "email" => "foo@mail.com"}
+            controller = UserController.new(db_client)
+
+            controller.create(data)
+            
+            id = db_client.last_id
+            data['bio'] = 'i am foo'
+
+            status = controller.update(id, data)
+
+            expect(status).to eq([
+                200,
+                {
+                    message: "data has been updated",
+                    username: data['username'],
+                    bio: data['bio']
+                }.to_json
+            ])
+        end
+    end
+
+    
 end
