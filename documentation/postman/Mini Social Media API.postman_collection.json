@@ -1,0 +1,1161 @@
+{
+	"info": {
+		"_postman_id": "f9b6ea09-9dc5-436a-a526-e1d11d4098b3",
+		"name": "Mini Social Media API",
+		"description": "## Problem:\nYou are tasked with developing a social media application which can be used to share information with other people. This application will only be used by people that work in a certain company so we cannot use existing public social media.\n\n### Global variables\n\nname | initial value | type\n---- | ------------- | ----\nbase_url | http://34.131.84.223:4567 | string\nuser_id | 1 | int\ntag | tag | string\npost_id | 1 | int",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create new account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json()\r",
+							"\r",
+							"pm.globals.set('user_id', response['id'])"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"{{$randomUserName}}\",\r\n    \"email\": \"{{$randomEmail}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/user",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"user"
+					]
+				},
+				"description": "## Specification\nAs a user, I want to save my username, email, and bio description.\n\nAuthentication and authorization is out of scope of this story and you don’t need to implement them"
+			},
+			"response": [
+				{
+					"name": "create new account",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"{{$randomUserName}}\",\r\n    \"email\": \"{{$randomEmail}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://34.131.84.223:4567/user",
+							"protocol": "http",
+							"host": [
+								"34",
+								"131",
+								"84",
+								"223"
+							],
+							"port": "4567",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "43"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Server",
+							"value": "WEBrick/1.6.0 (Ruby/2.7.0/2019-12-25)"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 Aug 2021 22:18:02 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"new account is created\",\n    \"id\": 3\n}"
+				}
+			]
+		},
+		{
+			"name": "edit account detail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"{{$randomUserName}}\",\r\n    \"bio\": \"{{$randomPhrase}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/user/:id",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"user",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{user_id}}"
+						}
+					]
+				},
+				"description": "## Specification\nAs a user, I want to save my username, email, and bio description.\n\nAuthentication and authorization is out of scope of this story and you don’t need to implement them"
+			},
+			"response": [
+				{
+					"name": "edit account detail",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Aurore_Pouros34\",\r\n    \"bio\": \"connecting the application won't do anything, we need to parse the neural JSON hard drive!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://34.131.84.223:4567/user/3",
+							"protocol": "http",
+							"host": [
+								"34",
+								"131",
+								"84",
+								"223"
+							],
+							"port": "4567",
+							"path": [
+								"user",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "163"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Server",
+							"value": "WEBrick/1.6.0 (Ruby/2.7.0/2019-12-25)"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 Aug 2021 22:22:05 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"data has been updated\",\n    \"username\": \"Aurore_Pouros34\",\n    \"bio\": \"connecting the application won't do anything, we need to parse the neural JSON hard drive!\"\n}"
+				}
+			]
+		},
+		{
+			"name": "create new post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json()\r",
+							"const post_id = response['post_id']\r",
+							"\r",
+							"pm.globals.set('post_id', post_id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"content\": \"{{$randomPhrase}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/user/post/:user_id",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"user",
+						"post",
+						":user_id"
+					],
+					"variable": [
+						{
+							"key": "user_id",
+							"value": "{{user_id}}"
+						}
+					]
+				},
+				"description": "## Specification\nAs a user, I want to post a text that might contain hashtag(s).\n\nMaximum limit of a text is 1000 characters"
+			},
+			"response": [
+				{
+					"name": "create new post",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"I'll navigate the virtual CSS capacitor, that should protocol the IB program!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://34.131.84.223:4567/user/post/3",
+							"protocol": "http",
+							"host": [
+								"34",
+								"131",
+								"84",
+								"223"
+							],
+							"port": "4567",
+							"path": [
+								"user",
+								"post",
+								"3"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "205"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Server",
+							"value": "WEBrick/1.6.0 (Ruby/2.7.0/2019-12-25)"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 Aug 2021 22:25:06 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"success create a post\",\n    \"user_id\": 3,\n    \"user_name\": \"Aurore_Pouros34\",\n    \"post_id\": 9,\n    \"content\": \"I'll navigate the virtual CSS capacitor, that should protocol the IB program!\",\n    \"attachment\": \"\",\n    \"tags\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "create new post with hashtag",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json()\r",
+							"const tag = response['tags'][0]['tag']\r",
+							"\r",
+							"pm.globals.set('tag', tag)\r",
+							"\r",
+							"const post_id = response['post_id']\r",
+							"\r",
+							"pm.globals.set('post_id', post_id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"content\": \"{{$randomPhrase}}\",\r\n    \"hashtags\": [\r\n        \"{{$randomNoun}}\",\r\n        \"{{$randomNoun}}\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/user/post/:user_id",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"user",
+						"post",
+						":user_id"
+					],
+					"variable": [
+						{
+							"key": "user_id",
+							"value": "{{user_id}}"
+						}
+					]
+				},
+				"description": "## Specification\nAs a user, I want to post a text that might contain hashtag(s).\n\nA hashtag is a text that is followed by # symbol, for instance: #generasigigih"
+			},
+			"response": [
+				{
+					"name": "create new post with hashtag",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"The IB application is down, override the mobile array so we can copy the IB firewall!\",\r\n    \"hashtags\": [\r\n        \"card\",\r\n        \"sensor\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://34.131.84.223:4567/user/post/3",
+							"protocol": "http",
+							"host": [
+								"34",
+								"131",
+								"84",
+								"223"
+							],
+							"port": "4567",
+							"path": [
+								"user",
+								"post",
+								"3"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "281"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Server",
+							"value": "WEBrick/1.6.0 (Ruby/2.7.0/2019-12-25)"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 Aug 2021 22:29:05 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"success create a post\",\n    \"user_id\": 3,\n    \"user_name\": \"Aurore_Pouros34\",\n    \"post_id\": 11,\n    \"content\": \"The IB application is down, override the mobile array so we can copy the IB firewall!\",\n    \"attachment\": \"\",\n    \"tags\": [\n        {\n            \"id\": 9,\n            \"tag\": \"card\",\n            \"amount\": 1\n        },\n        {\n            \"id\": 4,\n            \"tag\": \"sensor\",\n            \"amount\": 2\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "get posts with certain hashtag",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/posts?tag={{tag}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"posts"
+					],
+					"query": [
+						{
+							"key": "tag",
+							"value": "{{tag}}"
+						}
+					]
+				},
+				"description": "## Specification\nAs a user, I want to see all posts that contain a certain hashtag.\n\nA user can only filter by one hashtag at a time"
+			},
+			"response": [
+				{
+					"name": "get posts with certain hashtag",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://34.131.84.223:4567/posts?tag=card",
+							"protocol": "http",
+							"host": [
+								"34",
+								"131",
+								"84",
+								"223"
+							],
+							"port": "4567",
+							"path": [
+								"posts"
+							],
+							"query": [
+								{
+									"key": "tag",
+									"value": "card"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "224"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Server",
+							"value": "WEBrick/1.6.0 (Ruby/2.7.0/2019-12-25)"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 Aug 2021 22:31:28 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"posts\": [\n        {\n            \"content\": \"The IB application is down, override the mobile array so we can copy the IB firewall!\",\n            \"attachment\": \"\",\n            \"user_id\": 3,\n            \"username\": \"Aurore_Pouros34\",\n            \"tag\": \"card\",\n            \"created_time\": \"2021-08-17 05:29:05 +0700\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "comment on a post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"content\": \"{{$randomPhrase}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/comment/:user_id/:post_id",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"comment",
+						":user_id",
+						":post_id"
+					],
+					"variable": [
+						{
+							"key": "user_id",
+							"value": "{{user_id}}"
+						},
+						{
+							"key": "post_id",
+							"value": "{{post_id}}"
+						}
+					]
+				},
+				"description": "## Specification\nAs a user, I want to comment on a post"
+			},
+			"response": [
+				{
+					"name": "comment on a post",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"{{$randomPhrase}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://34.131.84.223:4567/comment/3/11",
+							"protocol": "http",
+							"host": [
+								"34",
+								"131",
+								"84",
+								"223"
+							],
+							"port": "4567",
+							"path": [
+								"comment",
+								"3",
+								"11"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "222"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Server",
+							"value": "WEBrick/1.6.0 (Ruby/2.7.0/2019-12-25)"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 Aug 2021 22:42:04 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"success create a comment\",\n    \"user_id\": 3,\n    \"user_name\": \"Aurore_Pouros34\",\n    \"comment_id\": 5,\n    \"content\": \"The HTTP application is down, parse the back-end sensor so we can navigate the CSS feed!\",\n    \"attachment\": \"\",\n    \"tags\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "comment with hashtag on a post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"content\": \"{{$randomPhrase}}\",\r\n    \"hashtags\": [\r\n        \"{{$randomNoun}}\",\r\n        \"{{$randomNoun}}\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/comment/:user_id/:post_id",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"comment",
+						":user_id",
+						":post_id"
+					],
+					"variable": [
+						{
+							"key": "user_id",
+							"value": "{{user_id}}"
+						},
+						{
+							"key": "post_id",
+							"value": "{{post_id}}"
+						}
+					]
+				},
+				"description": "## Specification\nAs a user, I want to comment on a post\n\nA comment can contain hashtag(s)\n\nA hashtag occurrence in a comment is counted in trending hashtags calculation"
+			},
+			"response": [
+				{
+					"name": "comment with hashtag on a post",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"{{$randomPhrase}}\",\r\n    \"hashtags\": [\r\n        \"{{$randomNoun}}\",\r\n        \"{{$randomNoun}}\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://34.131.84.223:4567/comment/3/11",
+							"protocol": "http",
+							"host": [
+								"34",
+								"131",
+								"84",
+								"223"
+							],
+							"port": "4567",
+							"path": [
+								"comment",
+								"3",
+								"11"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "280"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Server",
+							"value": "WEBrick/1.6.0 (Ruby/2.7.0/2019-12-25)"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 Aug 2021 22:45:00 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"success create a comment\",\n    \"user_id\": 3,\n    \"user_name\": \"Aurore_Pouros34\",\n    \"comment_id\": 6,\n    \"content\": \"I'll back up the neural USB circuit, that should capacitor the RAM protocol!\",\n    \"attachment\": \"\",\n    \"tags\": [\n        {\n            \"id\": 8,\n            \"tag\": \"matrix\",\n            \"amount\": 2\n        },\n        {\n            \"id\": 12,\n            \"tag\": \"system\",\n            \"amount\": 1\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "list of trending hashtag",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/trending_tags",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"trending_tags"
+					]
+				},
+				"description": "## Specification\nAs a user, I want to see the list of trending hashtags\n\nTrending hashtags are the top 5 most posted hashtags in the past 24 hours\n\nA post containing multiple instances of a hashtag only counts as 1 occurrence for trending hashtags calculation\n\nA hashtag occurrence in a comment is counted in trending hashtags calculation"
+			},
+			"response": [
+				{
+					"name": "list of trending hashtag",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://34.131.84.223:4567/trending_tags",
+							"protocol": "http",
+							"host": [
+								"34",
+								"131",
+								"84",
+								"223"
+							],
+							"port": "4567",
+							"path": [
+								"trending_tags"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "240"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Server",
+							"value": "WEBrick/1.6.0 (Ruby/2.7.0/2019-12-25)"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 Aug 2021 22:46:09 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"trending_tags\": [\n        {\n            \"hashtag_id\": 2,\n            \"tag\": \"protocol\",\n            \"amount\": 6\n        },\n        {\n            \"hashtag_id\": 8,\n            \"tag\": \"matrix\",\n            \"amount\": 2\n        },\n        {\n            \"hashtag_id\": 4,\n            \"tag\": \"sensor\",\n            \"amount\": 2\n        },\n        {\n            \"hashtag_id\": 1,\n            \"tag\": \"program\",\n            \"amount\": 1\n        },\n        {\n            \"hashtag_id\": 5,\n            \"tag\": \"capacitor\",\n            \"amount\": 1\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "create new post contain attachment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "attachment",
+							"type": "file",
+							"src": "/C:/Users/nardiyansah/Downloads/generasi gigih.png"
+						},
+						{
+							"key": "content",
+							"value": "{{$randomPhrase}}",
+							"contentType": "",
+							"type": "text"
+						},
+						{
+							"key": "hashtags[]",
+							"value": "{{$randomNoun}}",
+							"contentType": "",
+							"type": "text"
+						},
+						{
+							"key": "hashtags[]",
+							"value": "{{$randomNoun}}",
+							"contentType": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/user/post/:user_id",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"user",
+						"post",
+						":user_id"
+					],
+					"variable": [
+						{
+							"key": "user_id",
+							"value": "{{user_id}}"
+						}
+					]
+				},
+				"description": "## Specification\nAs a user, I want to attach things to a post\n\nThree kinds of attachment are allowed: pictures (jpg, png, gif), video (mp4), and file (any other extensions outside of pictures and videos)"
+			},
+			"response": [
+				{
+					"name": "create new post contain attachment",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "attachment",
+									"type": "file",
+									"src": "/C:/Users/nardiyansah/Downloads/generasi gigih.png"
+								},
+								{
+									"key": "content",
+									"value": "We need to generate the open-source SSL matrix!",
+									"contentType": "",
+									"type": "text"
+								},
+								{
+									"key": "hashtags[]",
+									"value": "driver",
+									"contentType": "",
+									"type": "text"
+								},
+								{
+									"key": "hashtags[]",
+									"value": "interface",
+									"contentType": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://34.131.84.223:4567/user/post/3",
+							"protocol": "http",
+							"host": [
+								"34",
+								"131",
+								"84",
+								"223"
+							],
+							"port": "4567",
+							"path": [
+								"user",
+								"post",
+								"3"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "307"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Server",
+							"value": "WEBrick/1.6.0 (Ruby/2.7.0/2019-12-25)"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 Aug 2021 22:51:42 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"success create a post\",\n    \"user_id\": 3,\n    \"user_name\": \"Aurore_Pouros34\",\n    \"post_id\": 12,\n    \"content\": \"We need to generate the open-source SSL matrix!\",\n    \"attachment\": \"http://localhost:4567/RackMultipart20210817-371-3mrhjq.png\",\n    \"tags\": [\n        {\n            \"id\": 6,\n            \"tag\": \"driver\",\n            \"amount\": 2\n        },\n        {\n            \"id\": 14,\n            \"tag\": \"interface\",\n            \"amount\": 1\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "comment with attachment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "attachment",
+							"type": "file",
+							"src": "/C:/Users/nardiyansah/Downloads/generasi gigih.png"
+						},
+						{
+							"key": "content",
+							"value": "{{$randomPhrase}}",
+							"type": "text"
+						},
+						{
+							"key": "hashtags[]",
+							"value": "{{$randomNoun}}",
+							"type": "text"
+						},
+						{
+							"key": "hashtags[]",
+							"value": "{{$randomNoun}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/comment/:user_id/:post_id",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"comment",
+						":user_id",
+						":post_id"
+					],
+					"variable": [
+						{
+							"key": "user_id",
+							"value": "{{user_id}}"
+						},
+						{
+							"key": "post_id",
+							"value": "{{post_id}}"
+						}
+					]
+				},
+				"description": "## Specification\nAs a user, I want to comment on a post\n\nThree kinds of attachment are allowed: pictures (jpg, png, gif), video (mp4), and file (any other extensions outside of pictures and videos)"
+			},
+			"response": [
+				{
+					"name": "comment with attachment",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "attachment",
+									"type": "file",
+									"src": "/C:/Users/nardiyansah/Downloads/generasi gigih.png"
+								},
+								{
+									"key": "content",
+									"value": "If we copy the interface, we can get to the JBOD firewall through the 1080p SMS firewall!",
+									"type": "text"
+								},
+								{
+									"key": "hashtags[]",
+									"value": "application",
+									"type": "text"
+								},
+								{
+									"key": "hashtags[]",
+									"value": "alarm",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://34.131.84.223:4567/comment/3/11",
+							"protocol": "http",
+							"host": [
+								"34",
+								"131",
+								"84",
+								"223"
+							],
+							"port": "4567",
+							"path": [
+								"comment",
+								"3",
+								"11"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "357"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Server",
+							"value": "WEBrick/1.6.0 (Ruby/2.7.0/2019-12-25)"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 Aug 2021 22:56:26 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"success create a comment\",\n    \"user_id\": 3,\n    \"user_name\": \"Aurore_Pouros34\",\n    \"comment_id\": 7,\n    \"content\": \"If we copy the interface, we can get to the JBOD firewall through the 1080p SMS firewall!\",\n    \"attachment\": \"http://localhost:4567/RackMultipart20210817-371-19xzdut.png\",\n    \"tags\": [\n        {\n            \"id\": 15,\n            \"tag\": \"application\",\n            \"amount\": 1\n        },\n        {\n            \"id\": 16,\n            \"tag\": \"alarm\",\n            \"amount\": 1\n        }\n    ]\n}"
+				}
+			]
+		}
+	]
+}
