@@ -125,4 +125,56 @@ RSpec.describe 'user controller' do
             ])
         end
     end
+
+    describe '#create_comment' do
+        it 'should create comment with specific id' do
+            content = {'content' => 'my first comment'}
+            controller = UserController.new(db_client)
+            
+            db_client.query("INSERT INTO users (username, email) VALUES ('fii', 'fii@mail.com')")
+            user_id = db_client.last_id
+            db_client.query("insert into posts (content, user_id) values ('post', #{user_id})")
+            post_id = db_client.last_id
+            
+            data = controller.create_comment(user_id, post_id, content)
+
+            expect(data).to eq([
+                201,
+                {
+                    message: 'success create a comment',
+                    user_id: user_id,
+                    user_name: 'fii',
+                    comment_id: 1,
+                    content: 'my first comment',
+                    attachment: "",
+                    tags: []
+                }.to_json
+            ])
+        end
+
+        it 'should create comment with one hashtag' do
+            content = {'content' => 'my first comment', 'hashtags' => ['ame']}
+            controller = UserController.new(db_client)
+            
+            db_client.query("INSERT INTO users (username, email) VALUES ('fii', 'fii@mail.com')")
+            user_id = db_client.last_id
+            db_client.query("insert into posts (content, user_id) values ('post', #{user_id})")
+            post_id = db_client.last_id
+
+            data = controller.create_comment(user_id, post_id, content)
+
+            expect(data).to eq([
+                201,
+                {
+                    message: 'success create a comment',
+                    user_id: user_id,
+                    user_name: 'fii',
+                    comment_id: 1,
+                    content: 'my first comment',
+                    attachment: "",
+                    tags: [{id: 1, tag: 'ame', amount: 1}]
+                }.to_json
+            ])
+        end
+    end
 end
