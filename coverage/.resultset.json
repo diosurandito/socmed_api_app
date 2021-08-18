@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "D:/gigih/Tahap_02/final_project/spec/controllers/post_controller_spec.rb": {
+      "D:/gigih/Tahap_02/final_project/spec/controllers/hashtag_controller_spec.rb": {
         "lines": [
           1,
           1,
@@ -18,18 +18,24 @@
           1,
           1,
           1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
           1,
           1,
           null,
           null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
           1,
           1,
           1,
@@ -47,7 +53,7 @@
           null
         ]
       },
-      "D:/gigih/Tahap_02/final_project/controllers/post_controller.rb": {
+      "D:/gigih/Tahap_02/final_project/controllers/hashtag_controller.rb": {
         "lines": [
           1,
           null,
@@ -66,13 +72,20 @@
           null
         ]
       },
-      "D:/gigih/Tahap_02/final_project/models/post.rb": {
+      "D:/gigih/Tahap_02/final_project/models/hashtag.rb": {
         "lines": [
           1,
           1,
           0,
           0,
+          null,
+          null,
+          1,
           0,
+          0,
+          0,
+          null,
+          null,
           0,
           null,
           null,
@@ -80,6 +93,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
           0,
           null,
           null,
@@ -106,6 +135,6 @@
         ]
       }
     },
-    "timestamp": 1629298561
+    "timestamp": 1629299018
   }
 }
