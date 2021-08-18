@@ -78,5 +78,51 @@ RSpec.describe 'user controller' do
         end
     end
 
-    
+    describe '#create_post' do
+        it 'should create post with specific user id' do
+            content = {'content' => 'my first post'}
+            controller = UserController.new(db_client)
+            
+            db_client.query("INSERT INTO users (username, email) VALUES ('fii', 'fii@mail.com')")
+            user_id = db_client.last_id
+            
+            data = controller.create_post(user_id, content)
+
+            expect(data).to eq([
+                201,
+                {
+                    message: 'success create a post',
+                    user_id: user_id,
+                    user_name: 'fii',
+                    post_id: 1,
+                    content: 'my first post',
+                    attachment: "",
+                    tags: []
+                }.to_json
+            ])
+        end
+
+        it 'should create post with one hashtag' do
+            content = {'content' => 'my first post', 'hashtags' => ['ame']}
+            controller = UserController.new(db_client)
+            
+            db_client.query("INSERT INTO users (username, email) VALUES ('fii', 'fii@mail.com')")
+            user_id = db_client.last_id
+
+            data = controller.create_post(user_id, content)
+
+            expect(data).to eq([
+                201,
+                {
+                    message: 'success create a post',
+                    user_id: user_id,
+                    user_name: 'fii',
+                    post_id: 1,
+                    content: 'my first post',
+                    attachment: "",
+                    tags: [{id: 1, tag: 'ame', amount: 1}]
+                }.to_json
+            ])
+        end
+    end
 end
