@@ -11,7 +11,7 @@ post_controller = PostController.new(db_client)
 hashtag_controller = HashtagController.new(db_client)
 
 get '/' do
-    'Hello world'
+    'Dio Surandito (GBE01047)'
 end
 
 post '/user' do
