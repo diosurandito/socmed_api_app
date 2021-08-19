@@ -1,0 +1,15 @@
+[Unit]
+Description=Sinatra application
+
+[Service]
+User=gbe01047
+WorkingDirectory=/home/gbe01047/socmed-api
+ExecStart=/home/gbe01047/.rbenv/shims/ruby app.rb
+Restart=on-failure
+Environment="DB_HOST_1=localhost"
+Environment="DB_USERNAME_1=root_dio"
+Environment="DB_PASSWORD_1=root_dio"
+Environment="DB_NAME_1=socmed_db"
+
+[Install]
+WantedBy=multi-user.target
