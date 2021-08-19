@@ -69,7 +69,7 @@ to test endpoint you can go to API documentation and import the url from there o
 
 ## API Documentation
 
-I create API documentation with postman. You can easily import it from `documentation/postman` folder
+I create API documentation with postman. You can easily import it from `documentation/postman/Mini Social Media API.postman.collection.json` file.
 
 In postman I use some global variable. Please make sure you provide it in your postman.
 
