@@ -4,6 +4,8 @@ require_relative './controllers/user_controller'
 require_relative './controllers/post_controller'
 require_relative './controllers/hashtag_controller'
 require_relative './helper/url'
+# uncomment the set bind if want deploy to the GCP Machine
+# set :bind, '0.0.0.0'
 
 db_client = create_db_client
 user_controller = UserController.new(db_client)
