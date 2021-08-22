@@ -1,6 +1,6 @@
 require_relative '../../controllers/user_controller'
 require_relative '../../db/db_connector'
-require 'mysql2'
+
 
 RSpec.describe 'user controller' do
     db_client = create_db_client
